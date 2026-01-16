@@ -1,0 +1,59 @@
+<!-- <section class="main-sec"> -->
+  <div class="container-fluid">
+    <h3>Dashboard</h3>
+  </div>
+
+  <div class="main-head">
+    <div class="main">
+      <!-- Registered -->
+      <div class="card shadow">
+        <div class="card-body main-card">
+          <span class="card-title badge badge-primary">Registered</span>
+          <p class="card-text">{{allStatusData.Registered}}</p>
+        </div>
+      </div>
+      <!-- Closed-->
+      <div class="card shadow">
+        <div class="card-body">
+          <span class="card-title badge badge-danger">Closed</span>
+          <p class="card-text">{{allStatusData.Closed}}</p>
+        </div>
+      </div>
+      <!-- Running -->
+      <div class="card shadow">
+        <div class="card-body">
+          <span class="card-title badge badge-success">Running</span>
+          <p class="card-text">{{allStatusData.Running}}</p>
+        </div>
+      </div>
+      <!-- Closure Delay -->
+      <div class="card shadow">
+        <div class="card-body">
+          <span class="card-title badge badge-warning">Closure Delay</span>
+          <p class="card-text">{{closureDelayCount}}</p>
+        </div>
+      </div>
+      <!-- Cancelled -->
+      <div class="card shadow">
+        <div class="card-body">
+          <span class="card-title badge badge-secondary">Cancelled</span>
+          <p class="card-text">{{allStatusData.Cancelled}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bar Chart -->
+    <div class="chart">
+      <div class="card shadow barchart">
+        <div class="chart-body">
+          <canvas baseChart class="chart" 
+          [data]="barChartData" 
+          [options]="barChartOptions" 
+          [plugins]="barChartPlugins"
+          [type]="barChartType">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </section> -->

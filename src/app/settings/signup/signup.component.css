@@ -1,0 +1,48 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card{
+    width: 500px;
+    top: 40px;
+}
+.card-body{
+    padding: 20px 40px;
+}
+h3{
+    text-align: center;
+}
+.err-msg{
+    color: red;
+}
+.form-input.err-border{
+    border: 1px solid red;
+}
+.form-input.valid-border{
+    border: 1px solid green;
+}
+.btn{
+    width: 100%;
+    border-radius: 50px;
+    border: none;
+}
+.req-star{
+    color:red;
+}
+h3{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.member{
+    float: right;
+    text-decoration: none;
+}
+.form-input{
+    display: block;
+    width: 100%;
+    line-height: 32px;
+    border-radius: 6px;
+    border: 1px solid lightgray;
+}

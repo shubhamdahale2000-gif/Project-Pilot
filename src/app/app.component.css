@@ -1,0 +1,19 @@
+.main-content {
+    margin-left: 4.4%;
+    /* background-color: #f0f8ff; */
+}
+
+.navbar {
+    padding: 0px;
+
+}
+
+@media screen and (max-width:600px) {
+    .main-content {
+        margin-left: 0%;
+    }
+
+    .navbar {
+        justify-content: center;
+    }
+}

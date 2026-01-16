@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar {
+  width: 60px;
+  height: 100vh;
+  background: white;
+  padding: 18% .5%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.active {
+  color: #252bd7
+}
+
+.sidebar ul li {
+  padding: 15px;
+}
+
+svg:hover {
+  color: rgb(34, 72, 169);
+}
+
+.menu-color {
+  color: grey;
+}
+
+.logout {
+  margin-top: 300%;
+}
+
+@media screen and (max-width:600px){
+  .sidebar {
+    height: auto;
+    padding: 0%;
+    top: auto;
+    bottom: 0px;
+    display: flex;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    padding-left: 8%;
+  }
+  ul{
+    display: -webkit-inline-box;
+    background: white;
+  }
+  .logout {
+    margin-top: 0%;
+  }
+  .sidebar ul {
+    flex-direction: column; 
+    justify-content: center; 
+  }
+}
