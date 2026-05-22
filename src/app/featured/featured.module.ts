@@ -5,29 +5,23 @@ import { FeaturedRoutingModule } from './featured-routing.module';
 import { ProjectListComponent } from '../project-list/project-list.component';
 import { FilterPipe } from '../appPipes/filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CustomDirective } from '../Directives/custom.directive';
 
 
-@NgModule({
-  declarations: [
-    ProjectListComponent,
-    FilterPipe,
-    CustomDirective],
-
-  imports: [
-    CommonModule,
-    FeaturedRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    FontAwesomeModule,
-    HttpClientModule,
-    NgxPaginationModule,
-  ],
-  providers: [FilterPipe]
-})
+@NgModule({ declarations: [
+        ProjectListComponent,
+        FilterPipe,
+        CustomDirective
+    ], imports: [CommonModule,
+        FeaturedRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        FontAwesomeModule,
+        NgxPaginationModule], 
+        providers: [FilterPipe, provideHttpClient(withInterceptorsFromDi())] })
 export class FeaturedModule {
   constructor(){
     console.log("Feature Module called")
