@@ -1,109 +1,143 @@
 <div class="main">
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Sign-Up</h3>
-            <!-- Form Start -->
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm(registerUser)">
-                <div class="row">
-                    <div class="mb-6 col form-group">
-                        <label for="firstName" class="form-label">Fist Name <span class="req-star">*</span></label>
-                        <input type="text" id="firstName" formControlName="firstName"
-                            [(ngModel)]="registerUser.firstName" class="form-input"
-                            [ngClass]="{'err-border': registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched), 'valid-border': registerForm.get('firstName')?.valid}">
-                        <div *ngIf="registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)"
-                            class="err-msg">
-                            <div *ngIf="registerForm.get('firstName')?.errors?.['required']">
-                                <small>FirstName is required.</small>
-                            </div>
-                            <div *ngIf="registerForm.get('firstName')?.errors?.['minlength']">
-                                <small>Minimum 2 characters required.</small>
-                            </div>
-                        </div>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">Sign-Up</h3>
+      <!-- Form Start -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm(registerUser)">
+        <div class="row">
+          <div class="mb-6 col form-group">
+            <label for="firstName" class="form-label">Fist Name <span class="req-star">*</span></label>
+            <input type="text" id="firstName" formControlName="firstName"
+              [(ngModel)]="registerUser.firstName" class="form-input"
+              [ngClass]="{'err-border': registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched), 'valid-border': registerForm.get('firstName')?.valid}">
+              @if (registerForm.get('firstName')?.invalid && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)) {
+                <div
+                  class="err-msg">
+                  @if (registerForm.get('firstName')?.errors?.['required']) {
+                    <div>
+                      <small>FirstName is required.</small>
                     </div>
-                    <div class="mb-6 col form-group">
-                        <label for="lastName" class="form-label">Last Name <span class="req-star">*</span></label>
-                        <input type="text" id="lastName" formControlName="lastName" 
-                        [(ngModel)]="registerUser.lastName" class="form-input"
-                        [ngClass]="{'err-border': registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched), 'valid-border': registerForm.get('lastName')?.valid}">
-                        <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)"
-                            class="err-msg">
-                            <div *ngIf="registerForm.get('lastName')?.errors?.['required']">
-                                <small>LastName is required.</small>
-                            </div>
-                            <div *ngIf="registerForm.get('lastName')?.errors?.['minlength']">
-                                <small>Minimum 3 characters required.</small>
-                            </div>
-                        </div>
+                  }
+                  @if (registerForm.get('firstName')?.errors?.['minlength']) {
+                    <div>
+                      <small>Minimum 2 characters required.</small>
                     </div>
+                  }
                 </div>
-                <div class="row">
-                    <div class="mb-6 col form-group">
-                        <label for="email" class="form-label">Email <span class="req-star">*</span></label>
-                        <input type="email" id="email" formControlName="email" class="form-input" 
-                        [(ngModel)]="registerUser.email"  [ngClass]="{'err-border': registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched), 'valid-border': registerForm.get('email')?.valid}"
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">       
-                        <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
-                            class="err-msg">
-                            <div *ngIf="registerForm.get('email')?.errors?.['required']">
-                                <small>Email is required.</small>
-                            </div>
-                            <div *ngIf="registerForm.get('email')?.errors?.['minlength']">
-                                <small>Minimum 6 characters required.</small>
-                            </div>
-                            <div *ngIf="registerForm.get('email')?.errors?.['pattern'] && !registerForm.get('email')?.errors?.['minlength'] && !registerForm.get('email')?.errors?.['required']">
-                                <small>Please enter a valid email.</small>
-                            </div>
+              }
+            </div>
+            <div class="mb-6 col form-group">
+              <label for="lastName" class="form-label">Last Name <span class="req-star">*</span></label>
+              <input type="text" id="lastName" formControlName="lastName"
+                [(ngModel)]="registerUser.lastName" class="form-input"
+                [ngClass]="{'err-border': registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched), 'valid-border': registerForm.get('lastName')?.valid}">
+                @if (registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)) {
+                  <div
+                    class="err-msg">
+                    @if (registerForm.get('lastName')?.errors?.['required']) {
+                      <div>
+                        <small>LastName is required.</small>
+                      </div>
+                    }
+                    @if (registerForm.get('lastName')?.errors?.['minlength']) {
+                      <div>
+                        <small>Minimum 3 characters required.</small>
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+            <div class="row">
+              <div class="mb-6 col form-group">
+                <label for="email" class="form-label">Email <span class="req-star">*</span></label>
+                <input type="email" id="email" formControlName="email" class="form-input"
+                  [(ngModel)]="registerUser.email"  [ngClass]="{'err-border': registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched), 'valid-border': registerForm.get('email')?.valid}"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                  @if (registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)) {
+                    <div
+                      class="err-msg">
+                      @if (registerForm.get('email')?.errors?.['required']) {
+                        <div>
+                          <small>Email is required.</small>
                         </div>
+                      }
+                      @if (registerForm.get('email')?.errors?.['minlength']) {
+                        <div>
+                          <small>Minimum 6 characters required.</small>
+                        </div>
+                      }
+                      @if (registerForm.get('email')?.errors?.['pattern'] && !registerForm.get('email')?.errors?.['minlength'] && !registerForm.get('email')?.errors?.['required']) {
+                        <div>
+                          <small>Please enter a valid email.</small>
+                        </div>
+                      }
                     </div>
-                    <div class="mb-6 col form-group">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-input" formControlName="phone" 
-                         [(ngModel)]="registerUser.phone" id="phone">
-                    </div>
+                  }
+                </div>
+                <div class="mb-6 col form-group">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input type="text" class="form-input" formControlName="phone"
+                    [(ngModel)]="registerUser.phone" id="phone">
+                  </div>
                 </div>
                 <div class="mb-6 form-group">
-                    <label for="password" class="form-label">Password <span class="req-star">*</span></label>
-                    <input type="password" class="form-input" formControlName="password"
-                        [(ngModel)]="registerUser.password" id="password" 
-                        [ngClass]="{'err-border': registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched), 'valid-border': registerForm.get('password')?.valid}"
-                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*__=+]).{8,16}">
-                    <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)"
+                  <label for="password" class="form-label">Password <span class="req-star">*</span></label>
+                  <input type="password" class="form-input" formControlName="password"
+                    [(ngModel)]="registerUser.password" id="password"
+                    [ngClass]="{'err-border': registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched), 'valid-border': registerForm.get('password')?.valid}"
+                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*__=+]).{8,16}">
+                    @if (registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)) {
+                      <div
                         class="err-msg">
-                        <div *ngIf="registerForm.get('password')?.errors?.['required']">
+                        @if (registerForm.get('password')?.errors?.['required']) {
+                          <div>
                             <small>Password is required.</small>
-                        </div>
-                        <div *ngIf="registerForm.get('password')?.errors?.['minlength']">
+                          </div>
+                        }
+                        @if (registerForm.get('password')?.errors?.['minlength']) {
+                          <div>
                             <small>Minimum 6 characters required.</small>
-                        </div>
-                        <div *ngIf="registerForm.get('password')?.errors?.['pattern'] && !registerForm.get('password')?.errors?.['minlength'] && !registerForm.get('password')?.errors?.['required']">
+                          </div>
+                        }
+                        @if (registerForm.get('password')?.errors?.['pattern'] && !registerForm.get('password')?.errors?.['minlength'] && !registerForm.get('password')?.errors?.['required']) {
+                          <div>
                             <small>Please enter a valid password.</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-6  form-group">
+                          </div>
+                        }
+                      </div>
+                    }
+                  </div>
+                  <div class="mb-6  form-group">
                     <label for="confirmPassword" class="form-label"> Confirm Password <span
-                            class="req-star">*</span></label>
+                    class="req-star">*</span></label>
                     <input type="password" class="form-input" formControlName="confirmPassword"
-                        [(ngModel)]="registerUser.confirmPassword" id="confirmPassword"
-                        [ngClass]="{'err-border': registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched), 'valid-border': registerForm.get('confirmPassword')?.valid}">
-                    <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)"
-                        class="err-msg">
-                        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">
-                            <small>Confirm password is required.</small>
+                      [(ngModel)]="registerUser.confirmPassword" id="confirmPassword"
+                      [ngClass]="{'err-border': registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched), 'valid-border': registerForm.get('confirmPassword')?.valid}">
+                      @if (registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)) {
+                        <div
+                          class="err-msg">
+                          @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+                            <div>
+                              <small>Confirm password is required.</small>
+                            </div>
+                          }
+                          @if (registerForm.get('confirmPassword')?.errors?.['passMismatch'] && !registerForm.get('confirmPassword')?.errors?.['minlength'] && !registerForm.get('confirmPassword')?.errors?.['required']) {
+                            <div>
+                              <small>Password do not match.</small>
+                            </div>
+                          }
                         </div>
-                        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['passMismatch'] && !registerForm.get('confirmPassword')?.errors?.['minlength'] && !registerForm.get('confirmPassword')?.errors?.['required']">
-                            <small>Password do not match.</small>
-                        </div>
+                      }
                     </div>
-                </div>
-                <div class="form-group">
-                    <p>
+                    <div class="form-group">
+                      <p>
                         <small>Already a member?</small><a class="member" routerLink="/login">Log In</a>
-                    </p>
-                    <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button>
+                      </p>
+                      <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                  <!-- Form End -->
                 </div>
-            </form>
-            <!-- Form End -->
-        </div>
-    </div>
-</div>
+              </div>
+            </div>
