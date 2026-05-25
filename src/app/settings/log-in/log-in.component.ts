@@ -4,9 +4,10 @@ import { LoginData } from 'src/app/Model/loginData.model';
 import { ShareDataService } from 'src/app/share-data.service';
 
 @Component({
-  selector: 'app-log-in',
-  templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.css']
+    selector: 'app-log-in',
+    templateUrl: './log-in.component.html',
+    styleUrls: ['./log-in.component.css'],
+    standalone: false
 })
 export class LogInComponent implements OnInit {
   loginData: LoginData = {
