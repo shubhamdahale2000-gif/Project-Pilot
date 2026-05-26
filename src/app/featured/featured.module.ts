@@ -11,17 +11,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CustomDirective } from '../Directives/custom.directive';
 
 
-@NgModule({ declarations: [
-        ProjectListComponent,
-        FilterPipe,
-        CustomDirective
-    ], imports: [CommonModule,
+@NgModule({
+    imports: [CommonModule,
         FeaturedRoutingModule,
         ReactiveFormsModule,
         FormsModule,
         FontAwesomeModule,
-        NgxPaginationModule], 
-        providers: [FilterPipe, provideHttpClient(withInterceptorsFromDi())] })
+        NgxPaginationModule, ProjectListComponent,
+        FilterPipe,
+        CustomDirective
+      ],
+    providers: [FilterPipe, provideHttpClient(withInterceptorsFromDi())] })
 export class FeaturedModule {
   constructor(){
     console.log("Feature Module called")

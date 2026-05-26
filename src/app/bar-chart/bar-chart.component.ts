@@ -7,8 +7,7 @@ import { ShareDataService } from '../share-data.service';
 @Component({
     selector: 'app-bar-chart',
     templateUrl: './bar-chart.component.html',
-    styleUrls: ['./bar-chart.component.css'],
-    standalone: false
+    styleUrls: ['./bar-chart.component.css']
 })
 export class BarChartComponent {
 

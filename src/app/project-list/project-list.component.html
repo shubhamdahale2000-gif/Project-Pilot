@@ -53,7 +53,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (data of allProjectData | filter: searchText | paginate: {itemsPerPage:10, currentPage:page}; track data) {
+          @for (data of allProjectData | filter: searchText | paginate: {itemsPerPage:10, currentPage:page}; track data.id) {
             <tr>
               <td class="nameside text-nowrap"><a (click)="editProjectModel(data)" data-toggle="modal"
                 data-target="#exampleModal"><strong>{{data.projectName}}</strong></a><br>

@@ -59,7 +59,7 @@
       "startDate": "2025-12-04",
       "endDate": "2025-12-11",
       "location": "Delhi",
-      "status": "Closed"
+      "status": "Running"
     },
     {
       "id": "6",
@@ -198,8 +198,22 @@
       "department": "Finance",
       "startDate": "2025-12-12",
       "endDate": "2025-12-25",
-      "location": "Delhi",
+      "location": "Mumbai",
       "status": "Closed"
+    },
+    {
+      "id": "SGWKCiq",
+      "projectName": "sss",
+      "reason": "Business",
+      "type": "External",
+      "division": "Compressor",
+      "category": "Quality A",
+      "priority": "Medium",
+      "department": "Strategy",
+      "startDate": "2026-05-08",
+      "endDate": "2026-05-15",
+      "location": "Pune",
+      "status": "Registered"
     }
   ]
 }

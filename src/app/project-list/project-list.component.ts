@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { projectData, statusData } from '../projectData.model';
 import { ShareDataService } from '../share-data.service';
 import { Subscription } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DatePipe } from '@angular/common';
+import { FilterPipe } from '../appPipes/filter.pipe';
 
 const statusData: statusData = {
     registered : 0,
@@ -17,7 +20,7 @@ const statusData: statusData = {
     selector: 'app-project-list',
     templateUrl: './project-list.component.html',
     styleUrls: ['./project-list.component.css'],
-    standalone: false
+    imports: [ReactiveFormsModule, FormsModule, NgxPaginationModule, DatePipe, FilterPipe]
 })
 
 export class ProjectListComponent {

@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginData } from 'src/app/Model/loginData.model';
-import { ShareDataService } from 'src/app/share-data.service';
+import { LoginData } from '../../Model/loginData.model';
+import { ShareDataService } from '../../share-data.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-log-in',
     templateUrl: './log-in.component.html',
     styleUrls: ['./log-in.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [FormsModule, CommonModule]
 })
 export class LogInComponent implements OnInit {
   loginData: LoginData = {
@@ -31,7 +34,7 @@ export class LogInComponent implements OnInit {
   onSubmit(data:any){
     console.log(data)
    this.tempUserLogIn = this.shareDataService.userLogIn(data)
-    this.shareDataService.isLoginError.subscribe((isError) => {
+    this.shareDataService.isLoginError.subscribe((isError: any) => {
       if(isError){
         this.loginErrorMsg = "Invalid user!"
       }

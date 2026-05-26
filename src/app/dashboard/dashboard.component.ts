@@ -2,15 +2,16 @@ import { Component, ViewChild } from '@angular/core';
 import { projectData } from '../projectData.model';
 import { ShareDataService } from '../share-data.service';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Subscription } from 'rxjs';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
-    standalone: false
+    standalone: true,
+    imports : [BaseChartDirective] 
 })
 export class DashboardComponent {
 
