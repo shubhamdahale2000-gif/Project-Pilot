@@ -1,7 +1,9 @@
-<div  class="navbar" *ngIf="showNavBar" > 
+@if (showNavBar) {
+  <div  class="navbar" >
     <app-navbar></app-navbar>
-</div>
+  </div>
+}
 
 <div class="main-content">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

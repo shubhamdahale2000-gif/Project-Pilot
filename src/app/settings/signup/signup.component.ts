@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterData } from 'src/app/Model/loginData.model';
-import { ShareDataService } from 'src/app/share-data.service';
-import { passwordMatch } from 'src/app/utils/validators';
+import { passwordMatch } from '../../utils/validators';
+import { RegisterData } from '../../Model/loginData.model';
+import { ShareDataService } from '../../share-data.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css'],
+    standalone: true,
+    imports: [ReactiveFormsModule, FormsModule, CommonModule]
 })
 export class SignupComponent {
 
@@ -39,11 +43,11 @@ export class SignupComponent {
 
   onSubmitRegisterForm(data: RegisterData) {
     this.shareDataService.addUser(data).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log("User registered:", res);
         this.router.navigate(['/login'])
       },
-      error: (err) => {
+      error: (err: any) => {
         console.log('Registration failed:', err)
       }
     })

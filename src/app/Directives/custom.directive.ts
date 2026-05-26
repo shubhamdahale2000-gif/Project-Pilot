@@ -1,8 +1,6 @@
 import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
-@Directive({
-  selector: '[appCustom]'
-})
+@Directive({ selector: '[appCustom]' })
 export class CustomDirective {
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
