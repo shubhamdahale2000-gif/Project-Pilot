@@ -91,9 +91,6 @@ export class ShareDataService {
     if (errorResponse.error instanceof ErrorEvent) {
       console.error('Client side error: ', errorResponse.error.message)
     }
-    //  else {
-    //   alert(`Server Side error : ${JSON.stringify(errorResponse.message)}`);
-    // }
     return throwError("Something went wrong");
   }
 

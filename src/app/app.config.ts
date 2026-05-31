@@ -2,50 +2,41 @@ import {
   ApplicationConfig,
   ErrorHandler,
   importProvidersFrom,
-  provideZoneChangeDetection
+  provideZoneChangeDetection,
 } from '@angular/core';
 
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import {
-  provideCharts,
-  withDefaultRegisterables
-} from 'ng2-charts';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 import { ShareDataService } from './share-data.service';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-
     provideZoneChangeDetection({
-      eventCoalescing: true
+      eventCoalescing: true,
     }),
 
     provideRouter(routes),
 
-    provideHttpClient(
-      withInterceptorsFromDi()
-    ),
+    provideHttpClient(withInterceptorsFromDi()),
 
-    provideCharts(
-      withDefaultRegisterables()
-    ),
+    provideCharts(withDefaultRegisterables()),
 
-    importProvidersFrom(
-      ReactiveFormsModule,
-      FormsModule,
-      FontAwesomeModule
-    ),
+    importProvidersFrom(ReactiveFormsModule, FormsModule, FontAwesomeModule),
 
     {
       provide: ErrorHandler,
-      useClass: ShareDataService
-    }
-  ]
+      useClass: ShareDataService,
+    },
+  ],
 };
