@@ -8,7 +8,7 @@ import {
 import { provideRouter } from '@angular/router';
 import {
   provideHttpClient,
-  withInterceptorsFromDi,
+  withInterceptors,
 } from '@angular/common/http';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 import { ShareDataService } from './share-data.service';
 import { routes } from './app.routes';
+import { authInterceptor } from './core/interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,7 +29,7 @@ export const appConfig: ApplicationConfig = {
 
     provideRouter(routes),
 
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([authInterceptor])),
 
     provideCharts(withDefaultRegisterables()),
 

@@ -9,8 +9,8 @@
           <label for="email">Email</label>
           <span class="req-star">*</span>
           <input type="email" class="form-input" id="email" name="email"
-            [(ngModel)]="loginData.email" #email="ngModel" minlength="6" required
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            [(ngModel)]="loginData.email" #email="ngModel" minlength="5" required
+            
             [ngClass]="{'err-border': email.invalid && email.touched || email.dirty, 'valid-border': email.valid}">
             @if (email.invalid && email.touched || email.dirty) {
               <div class="err-msg">
@@ -18,10 +18,7 @@
                   <small>This field is required</small>
                 }
                 @if (email.errors?.['minlength']) {
-                  <small>Minimum 6 digits required.</small>
-                }
-                @if (!email.errors?.['minlength'] && email.errors?.['pattern']) {
-                  <small>Enter a valid email.</small>
+                  <small>Minimum 5 digits required.</small>
                 }
               </div>
             }
@@ -32,7 +29,7 @@
             <div class="password">
               <input class="form-input" id="password" name="password"
                 [(ngModel)]="loginData.password" #password="ngModel" required minlength="6" #passwordInput
-                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*__=+]).{8,16}"
+                
                 [ngClass]="{'err-border': password.invalid && password.touched || password.dirty, 'valid-border': email.valid}">
                 <!-- <button type="button" class="password-icon" (click)="onShowHidePassword(passwordInput)">
                 <i class="fa-solid fa-eye"></i>
@@ -46,9 +43,6 @@
                 }
                 @if (password.errors?.['minlength']) {
                   <small>Minimum 6 digits required.</small>
-                }
-                @if (!password.errors?.['minlength'] && password.errors?.['pattern']) {
-                  <small>Enter a valid password.</small>
                 }
               </div>
             }

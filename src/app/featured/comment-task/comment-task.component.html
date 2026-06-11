@@ -1,0 +1,50 @@
+<div class="comment-wrapper">
+
+  <h2>Comments</h2>
+
+  @for(comment of comments; track comment.id) {
+
+  <div class="comment-card">
+
+    <div class="user-info">
+      User #{{comment.id}}
+    </div>
+
+    @if(!comment.isEditing) {
+
+    <div class="comment-body" (click)="editComment(comment)">
+
+      {{comment.body}}
+
+    </div>
+
+    }
+
+    @if(comment.isEditing) {
+
+    <div class="edit-section">
+
+      <textarea [(ngModel)]="comment.body" rows="3">
+          </textarea>
+
+      <div class="action-buttons">
+
+        <button class="save-btn" (click)="saveComment(comment)">
+          Save
+        </button>
+
+        <button class="cancel-btn" (click)="cancelComment(comment)">
+          Cancel
+        </button>
+
+      </div>
+
+    </div>
+
+    }
+
+  </div>
+
+  }
+
+</div>

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FilterPipe } from '../appPipes/filter.pipe';
 
 const statusData: statusData = {
@@ -20,7 +20,8 @@ const statusData: statusData = {
     selector: 'app-project-list',
     templateUrl: './project-list.component.html',
     styleUrls: ['./project-list.component.css'],
-    imports: [ReactiveFormsModule, FormsModule, NgxPaginationModule, DatePipe, FilterPipe]
+    standalone: true,
+    imports: [ReactiveFormsModule, FormsModule, NgxPaginationModule, DatePipe, FilterPipe, CommonModule]
 })
 
 export class ProjectListComponent {
@@ -88,6 +89,7 @@ export class ProjectListComponent {
       this.tempAddProject.unsubscribe()
     }
   }
+
 
   // api call to get Project list
   getProjectList() {

@@ -4,6 +4,7 @@ import { LoginData } from '../../Model/loginData.model';
 import { ShareDataService } from '../../share-data.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
     selector: 'app-log-in',
@@ -21,7 +22,7 @@ export class LogInComponent implements OnInit {
   loginErrorMsg: string = "";
   password: string = "";
   showPassword: boolean = false;
-  constructor(private shareDataService: ShareDataService, private router:Router ) {}
+  constructor(private shareDataService: ShareDataService, private router:Router, private authService: AuthService ) {}
 
   ngOnInit() {}
 
@@ -33,7 +34,33 @@ export class LogInComponent implements OnInit {
   // on form submit
   onSubmit(data:any){
     console.log(data)
-   this.tempUserLogIn = this.shareDataService.userLogIn(data)
+  //  this.tempUserLogIn = this.shareDataService.userLogIn(data)
+
+  this.authService.login(data)
+.subscribe({
+  next: (res: any) => {
+
+    localStorage.setItem(
+      'accessToken',
+      res.accessToken
+    );
+
+    localStorage.setItem(
+      'refreshToken',
+      res.refreshToken
+    );
+
+    localStorage.setItem(
+      'user',
+      JSON.stringify(res)
+    );
+
+    this.router.navigate(['/dashboard']);
+  },
+  error: () => {
+    this.loginErrorMsg = "Invalid user!"
+  }
+});
     this.shareDataService.isLoginError.subscribe((isError: any) => {
       if(isError){
         this.loginErrorMsg = "Invalid user!"

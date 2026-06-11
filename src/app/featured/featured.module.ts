@@ -9,6 +9,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CustomDirective } from '../Directives/custom.directive';
+import { CommentTaskComponent } from './comment-task/comment-task.component';
 
 
 @NgModule({
@@ -17,9 +18,11 @@ import { CustomDirective } from '../Directives/custom.directive';
         ReactiveFormsModule,
         FormsModule,
         FontAwesomeModule,
-        NgxPaginationModule, ProjectListComponent,
+        NgxPaginationModule,
+        ProjectListComponent,
         FilterPipe,
-        CustomDirective
+        CustomDirective,
+        CommentTaskComponent
       ],
     providers: [FilterPipe, provideHttpClient(withInterceptorsFromDi())] })
 export class FeaturedModule {

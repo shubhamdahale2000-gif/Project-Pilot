@@ -1,227 +1,345 @@
-<!-- Table start -->
-<!-- <section class="main-sec"> -->
-
-<div class="container-fluid d-flex">
+<div class="container-fluid page-header">
   <h3>Project List</h3>
-  <button type="button" (click)="addProjectModel()" class="btn btn-primary add-button ml-auto" data-toggle="modal"
-    data-target="#exampleModal">
+
+  <button
+    type="button"
+    (click)="addProjectModel()"
+    class="btn btn-primary add-button"
+    data-toggle="modal"
+    data-target="#exampleModal"
+  >
     Add Project
   </button>
 </div>
 
-
 <div class="card shadow main-card">
-  <div class="card-body ">
-    <div class="row">
-      <!-- search -->
-      <div class="col search">
+  <div class="card-body">
+    <!-- Search & Sort -->
+    <div class="row filter-row">
+      <div class="col-lg-6 col-md-12 search">
         <i class="fa fa-search"></i>
-        <input type="text" class="form-control" placeholder="Search Project Name" id="search" name="search"
-          [(ngModel)]="searchText">
-        </div>
-        <!-- Sorting by Column -->
-        <div class="col col_1">
-          <div class="sort"><label>Sort By :</label></div>
-          <select class="sortDropdown" (change)="sortTable($event)">
-            <option value=""></option>
-            <option value="projectName">Project Name</option>
-            <option value="reason">Reason</option>
-            <option value="type">Type</option>
-            <option value="division">Division</option>
-            <option value="category">Category</option>
-            <option value="priority">Priority</option>
-            <option value="department">Department</option>
-            <option value="location">Location</option>
-            <option value="status">Status</option>
-          </select>
-        </div>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search Project Name"
+          [(ngModel)]="searchText"
+        />
       </div>
-      <!-- Project List table -->
-      <table class="table">
+
+      <div class="col-lg-6 col-md-12 sort-section">
+        <label>Sort By :</label>
+
+        <select class="form-select sortDropdown" (change)="sortTable($event)">
+          <option value=""></option>
+          <option value="projectName">Project Name</option>
+          <option value="reason">Reason</option>
+          <option value="type">Type</option>
+          <option value="division">Division</option>
+          <option value="category">Category</option>
+          <option value="priority">Priority</option>
+          <option value="department">Department</option>
+          <option value="location">Location</option>
+          <option value="status">Status</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Responsive Table -->
+    <div class="table-responsive">
+      <table class="table table-hover">
         <thead class="table-head">
           <tr>
-            <th class="centerhead _width">Project Name</th>
-            <th class="centerhead">Reason</th>
-            <th class="centerhead">Type</th>
-            <th class="centerhead">Division</th>
-            <th class="centerhead">Category</th>
-            <th class="centerhead">Priority</th>
-            <th class="centerhead">Dept.</th>
-            <th class="centerhead">Location</th>
-            <th class="centerhead">Status</th>
-            <th class="centerhead">Change Status</th>
+            <th>Project Name</th>
+            <th>Reason</th>
+            <th>Type</th>
+            <th>Division</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Dept.</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Change Status</th>
           </tr>
         </thead>
+
         <tbody>
-          @for (data of allProjectData | filter: searchText | paginate: {itemsPerPage:10, currentPage:page}; track data.id) {
+          @for (
+            data of allProjectData
+              | filter: searchText
+              | paginate: { itemsPerPage: 10, currentPage: page };
+            track data.id
+          ) {
             <tr>
-              <td class="nameside text-nowrap"><a (click)="editProjectModel(data)" data-toggle="modal"
-                data-target="#exampleModal"><strong>{{data.projectName}}</strong></a><br>
-                <small>{{ data.startDate | date:'mediumDate'}} to {{ data.endDate | date:'mediumDate' }}</small>
+              <td class="project-name">
+                <a
+                  (click)="editProjectModel(data)"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  <strong>{{ data.projectName }}</strong>
+                </a>
+
+                <small>
+                  {{ data.startDate | date: "mediumDate" }}
+                  to
+                  {{ data.endDate | date: "mediumDate" }}
+                </small>
               </td>
-              <td>{{data.reason}}</td>
-              <td>{{data.type}}</td>
-              <td>{{data.division}}</td>
-              <td>{{data.category}}</td>
-              <td>{{data.priority}}</td>
-              <td>{{data.department}}</td>
-              <td>{{data.location}}</td>
-              <td class="bold">{{data.status}}</td>
-              <td class="d-flex"><button (click)="changeStatus(data, 'Running')" type="button"
-              class="btn startbtn ">Start</button>&nbsp;
-              <button (click)="changeStatus(data, 'Closed')" type="button" class="btn otherbtn">Close</button>&nbsp;
-              <button (click)="changeStatus(data, 'Cancelled')" type="button" class="btn otherbtn">Cancel</button>
-              <!-- <button (click)="deleteProject(data.id)" type="button" class="btn otherbtn">Delete</button></td> -->
+
+              <td>{{ data.reason }}</td>
+              <td>{{ data.type }}</td>
+              <td>{{ data.division }}</td>
+              <td>{{ data.category }}</td>
+              <td>{{ data.priority }}</td>
+              <td>{{ data.department }}</td>
+              <td>{{ data.location }}</td>
+
+              <td>
+                <span
+                  class="status-badge"
+                  [class.status-registered]="
+                    data.status?.toLowerCase() === 'registered'
+                  "
+                  [class.status-running]="
+                    data.status?.toLowerCase() === 'running'
+                  "
+                  [class.status-closed]="
+                    data.status?.toLowerCase() === 'closed'
+                  "
+                  [class.status-cancelled]="
+                    data.status?.toLowerCase() === 'cancelled'
+                  "
+                  [class.status-delaycloser]="
+                    data.status?.toLowerCase() === 'delayCloser'
+                  "
+                >
+                  {{ data.status }}
+                </span>
+              </td>
+
+<td>
+  <div class="action-buttons">
+
+    @if (data.status !== 'Running') {
+      <button
+  (click)="changeStatus(data, 'Running')"
+  class="btn btn-start">
+  Start
+</button>
+    }
+
+  @if (data.status !== 'Closed') {
+    <button
+      (click)="changeStatus(data, 'Closed')"
+      class="btn btn-project-close">
+      Close
+    </button>
+  }
+@if (data.status !== 'Cancelled') {
+    <button
+      (click)="changeStatus(data, 'Cancelled')"
+      class="btn btn-cancel">
+      Cancel
+    </button>
+  }
+  </div>
+</td>
             </tr>
           }
         </tbody>
       </table>
-      <!--Pagination  -->
-      <pagination-controls class="centerhead" (pageChange)="page = $event"></pagination-controls>
     </div>
+
+    <pagination-controls (pageChange)="page = $event"> </pagination-controls>
   </div>
 <!-- </section> -->
 
 <!-- Modal -->
 @if (editMode) {
-  <div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            @if (showAdd) {
-              <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
-            }
-            @if (showEdit) {
-              <h5 class="modal-title" id="exampleModalLabel">Edit Project</h5>
-            }
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+<div>
+  <div class="modal fade"
+       id="exampleModal"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      @if (showAdd) {
+        <h5 class="modal-title">Add Project</h5>
+      }
+
+      @if (showEdit) {
+        <h5 class="modal-title">Edit Project</h5>
+      }
+
+      <button type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close">
+        <span>&times;</span>
+      </button>
+    </div>
+
+    <form [formGroup]="formValue">
+
+      <div class="modal-body">
+
+        <!-- Row 1 -->
+        <div class="row g-2">
+
+          <div class="col-md-6 form-group">
+            <label>Project Name <span class="req-star">*</span></label>
+            <input
+              type="text"
+              formControlName="projectName"
+              class="form-control"
+              placeholder="Enter Project Name">
           </div>
-          <!-- form start -->
-          <form [formGroup]="formValue" (ngSubmit)="formSubmit(formValue.value)">
-            <div class="card-body">
-              <div class="row search-text">
-                <!-- Project Name -->
-                <div class="col mb-6 form-group textarea">
-                  <label>Project Name <span class="req-star">*</span></label>
-                  <input type="text" formControlName="projectName" class="form-control" placeholder="Enter Project Name"
-                    id="projectName">
-                  </div>
-                  <!-- Reason -->
-                  <div class=" col mb-6 form-group">
-                    <label>Reason <span class="req-star">*</span></label>
-                    <select formControlName="reason" class="form-select hight" aria-label="Default select example">
-                      <option>Business</option>
-                      <option>Dealership</option>
-                      <option>Transport</option>
-                    </select>
-                  </div>
-                </div>
-                <!-- <div class="form-fields">
-                <div class="container"> -->
-                  <div class="row">
-                    <!-- Type -->
-                    <div class="col mb-6 form-group">
-                      <label>Type <span class="req-star">*</span></label>
-                      <select formControlName="type" required class="form-select hight" aria-label="Default select example">
-                        <option>Internal</option>
-                        <option>External</option>
-                        <option>Vendor</option>
-                      </select>
-                    </div>
-                    <!-- Division -->
-                    <div class="col mb-6 form-group">
-                      <label>Division <span class="req-star">*</span></label>
-                      <select formControlName="division" class="form-select hight" aria-label="Default select example">
-                        <option>Compressor</option>
-                        <option>Filters</option>
-                        <option>Pumps</option>
-                        <option>Glass</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <!-- Category -->
-                    <div class="col mb-6 form-group">
-                      <label>Category <span class="req-star">*</span></label>
-                      <select formControlName="category" class="form-select hight" aria-label="Default select example">
-                        <option>Quality A</option>
-                        <option>Quality B</option>
-                        <option>Quality C</option>
-                        <option>Quality D</option>
-                      </select>
-                    </div>
-                    <!-- Priority -->
-                    <div class="col mb-6 form-group">
-                      <label>Priority <span class="req-star">*</span></label>
-                      <select formControlName="priority" class="form-select hight" aria-label="Default select example">
-                        <option>High</option>
-                        <option>Medium</option>
-                        <option>Low</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <!-- Department -->
-                    <div class="col mb-6 form-group">
-                      <label>Department <span class="req-star">*</span></label>
-                      <select formControlName="department" class="form-select hight" aria-label="Default select example">
-                        <option>Strategy</option>
-                        <option>Finance</option>
-                        <option>Quality</option>
-                        <option>Maintenance</option>
-                        <option>Stores</option>
-                        <option>HR</option>
-                      </select>
-                    </div>
-                    <!-- Location -->
-                    <div class="col mb-6 form-group">
-                      <label>Location <span class="req-star">*</span></label>
-                      <select formControlName="location" class="form-select hight-loc" aria-label="Default select example">
-                        <option>Pune</option>
-                        <option>Delhi</option>
-                        <option>Mumbai</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <!-- Start Date -->
-                    <div class="col mb-6 form-group">
-                      <div class="form-group hight">
-                        <label for="startdatepicker">Start Date as per Project Plan <span class="req-star">*</span></label>
-                        <input formControlName="startDate" type="date" class="form-control datepicker" id="startdatepicker"
-                          name="startDate">
-                        </div>
-                      </div>
-                      <!-- End Date -->
-                      <div class="col mb-6 form-group">
-                        <div class="form-group hight">
-                          <label for="enddatepicker">End Date as per Project Plan <span class="req-star">*</span></label>
-                          <input formControlName="endDate" type="date" class="form-control datepicker" id="enddatepicker"
-                            name="endDate">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                  <!-- form end -->
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- Update Changes Button -->
-                    @if (showEdit) {
-                      <button type="button" (click)="updateProject()" class="btn btn-success">Update
-                      Project</button>
-                    }
-                    <!-- Add Project Button -->
-                    @if (showAdd) {
-                      <button type="button" (click)="addProject()" class="btn btn-primary">Save Project</button>
-                    }
-                  </div>
-                </div>
-              </div>
-            </div>
+
+          <div class="col-md-6 form-group">
+            <label>Reason <span class="req-star">*</span></label>
+            <select formControlName="reason" class="form-select">
+              <option>Business</option>
+              <option>Dealership</option>
+              <option>Transport</option>
+            </select>
           </div>
+
+        </div>
+
+        <!-- Row 2 -->
+        <div class="row g-2">
+
+          <div class="col-md-6 form-group">
+            <label>Type <span class="req-star">*</span></label>
+            <select formControlName="type" class="form-select">
+              <option>Internal</option>
+              <option>External</option>
+              <option>Vendor</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label>Division <span class="req-star">*</span></label>
+            <select formControlName="division" class="form-select">
+              <option>Compressor</option>
+              <option>Filters</option>
+              <option>Pumps</option>
+              <option>Glass</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Row 3 -->
+        <div class="row g-2">
+
+          <div class="col-md-6 form-group">
+            <label>Category <span class="req-star">*</span></label>
+            <select formControlName="category" class="form-select">
+              <option>Quality A</option>
+              <option>Quality B</option>
+              <option>Quality C</option>
+              <option>Quality D</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label>Priority <span class="req-star">*</span></label>
+            <select formControlName="priority" class="form-select">
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Row 4 -->
+        <div class="row g-2">
+
+          <div class="col-md-6 form-group">
+            <label>Department <span class="req-star">*</span></label>
+            <select formControlName="department" class="form-select">
+              <option>Strategy</option>
+              <option>Finance</option>
+              <option>Quality</option>
+              <option>Maintenance</option>
+              <option>Stores</option>
+              <option>HR</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label>Location <span class="req-star">*</span></label>
+            <select formControlName="location" class="form-select">
+              <option>Pune</option>
+              <option>Delhi</option>
+              <option>Mumbai</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Row 5 -->
+        <div class="row g-2">
+
+          <div class="col-md-6 form-group">
+            <label>Start Date <span class="req-star">*</span></label>
+            <input
+              type="date"
+              formControlName="startDate"
+              class="form-control">
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label>End Date <span class="req-star">*</span></label>
+            <input
+              type="date"
+              formControlName="endDate"
+              class="form-control">
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal">
+          Close
+        </button>
+
+        @if (showEdit) {
+          <button type="button"
+                  (click)="updateProject()"
+                  class="btn btn-success">
+            Update Project
+          </button>
         }
+
+        @if (showAdd) {
+          <button type="button"
+                  (click)="addProject()"
+                  class="btn btn-primary">
+            Save Project
+          </button>
+        }
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+  </div>
+</div>
+}
